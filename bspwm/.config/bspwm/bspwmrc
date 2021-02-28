@@ -1,0 +1,82 @@
+#! /bin/sh
+
+pgrep -x sxhkd > /dev/null || sxhkd -m 1 &
+
+### Theme
+# Dracula 
+bspc config normal_border_color "#44475a"
+bspc config presel_feedback_color "#6272a4"
+# pink
+bspc config active_border_color "#bd93f9"
+bspc config focused_border_color "#ff79c6"
+# cyan
+# bspc config active_border_color "#6272a4"
+# bspc config focused_border_color "#8be9fd"
+
+# Nord
+#bspc config normal_border_color		"#4c566a"
+#bspc config focused_border_color	"#88c0d0"
+#bspc config presel_feedback_color	"#88c0d0"
+
+feh --no-fehbg --bg-scale ~/.config/feh/wallpaper/dracula.png
+
+# Instancie polybar
+~/.config/polybar/external-monitors-laptop.sh &
+
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
+
+# Dual screen
+bspc monitor DP2 -d 1 2 3 4 5
+bspc monitor HDMI1 -d 6 7 8 9 10
+
+# Utiliser lorsque les écrans externe ne sont pas connectés
+#bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 10
+
+bspc config border_width         2
+bspc config border_radius        0
+bspc config window_gap           5
+bspc config top_padding 45
+bspc config right_padding 0
+bspc config bottom_padding 0
+bspc config left_padding 0
+
+bspc config split_ratio          0.52
+bspc config single_monocle 			 false 
+bspc config borderless_monocle   false
+bspc config gapless_monocle      false
+
+# Workspace 1
+bspc rule -a jetbrains-phpstorm desktop='^1'
+bspc rule -a jetbrains-phpstorm:*:"Welcome to PhpStorm" state=floating
+bspc rule -a jetbrains-goland desktop='^1'
+bspc rule -a jetbrains-goland:*:"Welcome to GoLand" state=floating
+bspc rule -a jetbrains-studio:*:"Android Studio Setup Wizard" state=floating
+bspc rule -a jetbrains-studio:*:"Welcome to Android Studio" state=floating
+bspc rule -a jetbrains-studio:*:"Android Virtual Device Manager" state=floating
+
+# Workspace 2
+bspc rule -a Google-chrome desktop='^2'
+bspc rule -a Firefox desktop='^2'
+bspc rule -a Chromium desktop='^2'
+
+# Workspace 3
+#bspc rule -a Alacritty desktop='^3' follow=on
+
+# Workspace 8
+bspc rule -a "Spotify" desktop='^8'
+
+# Workspace 9
+bspc rule -a "discord" desktop='^9'
+
+# Workspace 10
+bspc rule -a "VirtualBox Manager" desktop='^10'
+
+bspc rule -a "feh" state=floating follow=on
+bspc rule -a "Seafile Client" state=floating
+bspc rule -a "Pavucontrol" state=floating center=true rectangle=800x600+0+0
+bspc rule -a "Blueman-manager" state=floating center=true rectangle=800x600+0+0
+bspc rule -a "KeePassXC" state=floating center=true rectangle=800x600+0+0
+bspc rule -a "1Password" state=floating center=true rectangle=800x600+0+0
+bspc rule -a "jetbrains-toolbox" state=floating
+bspc rule -a "Gnome-calculator" state=floating

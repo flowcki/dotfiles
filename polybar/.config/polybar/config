@@ -1,0 +1,516 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+background = ${xrdb:Polybar.background}
+foreground = ${xrdb:Polybar.foreground}
+accent     = ${xrdb:Polybar.accent}
+
+black       = ${xrdb:Polybar.color0}
+red         = ${xrdb:Polybar.color1}
+green       = ${xrdb:Polybar.color2}
+yellow      = ${xrdb:Polybar.color3}
+blue        = ${xrdb:Polybar.color4}
+magenta     = ${xrdb:Polybar.color5}
+cyan        = ${xrdb:Polybar.color6}
+white       = ${xrdb:Polybar.color7}
+gray        = #657b83
+
+[bar/main]
+offset-y = 5
+height = 40
+radius = 6
+fixed-center = true
+wm-restack = bspwm
+override-redirect = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = FiraMono Nerd Font:style=Regular:size=10;3
+font-1 = FontAwesome5Free:style=Solid:size=10;3
+font-2 = FontAwesome5Free:style=Regular:size=10;3
+font-3 = FontAwesome5Brands:style=Regular:size=10;3
+
+module-margin-left = 1
+module-margin-right = 1
+
+[bar/left-one]
+inherit = bar/main
+monitor = ${env:MONITOR:DP2}
+locale = fr_FR.UTF-8
+width = 14%
+offset-x = 5
+modules-center = time
+
+[bar/left-two]
+inherit = bar/main
+monitor = ${env:MONITOR:DP2}
+width = 8%
+offset-x = 280
+modules-center = bspwm
+
+[bar/left-three]
+inherit = bar/main
+monitor = ${env:MONITOR:DP2}
+width = 31%
+offset-x = 1123
+modules-center = pulseaudio-control battery wifi
+
+[bar/left-four]
+inherit = bar/main
+monitor = ${env:MONITOR:DP2}
+tray-position = center 
+width = 10%
+offset-x = 1723
+modules-center = systray
+
+[bar/right-one]
+inherit = bar/main
+monitor = ${env:MONITOR:HDMI1}
+width = 8%
+offset-x = 5
+modules-center = bspwm
+
+[bar/laptop-one]
+inherit = bar/main
+monitor = ${env:MONITOR:eDP1}
+width = 14%
+offset-x = 5
+modules-center = time
+
+[bar/laptop-two]
+inherit = bar/main
+monitor = ${env:MONITOR:eDP1}
+width = 14%
+offset-x = 280
+modules-center = bspwm
+
+[bar/laptop-three]
+inherit = bar/main
+monitor = ${env:MONITOR:eDP1}
+width = 31%
+offset-x = 1123
+modules-center = pulseaudio-control battery wifi
+
+[bar/laptop-four]
+inherit = bar/main
+monitor = ${env:MONITOR:eDP1}
+tray-position = center 
+width = 10%
+offset-x = 1723
+modules-center = systray
+
+;; =========== EXTERNAL MONITOR =============
+[bar/left-one-external-monitor]
+inherit = bar/main
+monitor = ${env:MONITOR:HDMI1}
+locale = fr_FR.UTF-8
+width = 14%
+offset-x = 5
+modules-center = time
+
+[bar/left-two-external-monitor]
+inherit = bar/main
+monitor = ${env:MONITOR:HDMI1}
+width = 8%
+offset-x = 280
+modules-center = bspwm
+
+[bar/left-three-external-monitor]
+inherit = bar/main
+monitor = ${env:MONITOR:HDMI1}
+width = 31%
+offset-x = 1123
+modules-center = pulseaudio-control battery wifi
+
+[bar/left-four-external-monitor]
+inherit = bar/main
+monitor = ${env:MONITOR:HDMI1}
+tray-position = center 
+width = 10%
+offset-x = 1723
+modules-center = systray
+
+[bar/right-one-external-monitor]
+inherit = bar/main
+monitor = ${env:MONITOR:eDP1}
+width = 8%
+offset-x = 5
+modules-center = bspwm
+
+
+;; =========== TIME =============
+
+[module/time]
+type = internal/date
+interval = 1
+date = %a, %d %B
+date-alt = %a, %d %B
+time = %H:%M %
+time-alt = %H:%M:%S
+format-prefix = 
+format-prefix-foreground = ${colors.accent}
+format = <label>
+label = "  %date% | %time% "
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+
+;; =================== BATTERY =====================
+
+[module/battery]
+type = internal/battery
+
+full-at = 99
+
+battery = BAT0
+adapter = ADP1 
+
+poll-interval = 5
+time-format = %H:%M
+
+format-charging = "<animation-charging>  <label-charging>"
+format-discharging = "<ramp-capacity>  <label-discharging>"
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.magenta}
+format-full-prefix-background = ${colors.background}
+label-full = " 100%"
+label-full-background = ${colors.background}
+label-full-foreground = ${colors.foreground}
+label-charging-background = ${colors.background}
+label-charging-foreground = ${colors.foreground}
+label-discharging-foreground = ${colors.foreground}
+label-discharging-background = ${colors.background}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-background = ${colors.background}
+ramp-capacity-foreground = ${colors.magenta}
+ramp-capacity-0-background = ${colors.red}
+ramp-capacity-0-foreground = ${colors.red}
+ramp-capacity-1-foreground = ${colors.red}
+ramp-capacity-2-foreground = ${colors.yellow}
+
+animation-charging-0 = 
+animation-charging-background = ${colors.background}
+animation-charging-foreground = ${colors.magenta}
+animation-charging-framerate = 1
+
+[module/systray]
+type = custom/script
+exec = echo " "
+
+format = <label>
+label = %output%
+
+;; =================== BSPWM =====================
+[module/bspwm]
+type = internal/bspwm
+
+pin-workspaces = true
+enable-click = true
+enable-scroll = true
+
+format = <label-state>
+
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+
+label-monitor = %name% %icon%
+
+#label-focused = 
+label-focused = %icon%
+label-focused-padding = 1
+label-focused-foreground = ${colors.accent}
+label-focused-background = ${colors.background}
+
+label-occupied = %icon%
+label-occupied-padding = 1
+label-occupied-foreground = ${colors.foreground}
+label-occupied-background = ${colors.background}
+
+label-urgent = %icon%
+label-urgent-padding = 1
+label-urgent-foreground = ${colors.red}
+
+label-empty = 
+label-empty-padding = 1
+label-empty-foreground = ${colors.gray}
+label-empty-background = ${colors.background}
+
+ws-icon-0= 1;
+ws-icon-1= 2;
+ws-icon-2= 3;
+ws-icon-3= 4;
+ws-icon-4= 5;
+ws-icon-5= 6;
+ws-icon-6= 7;
+ws-icon-7= 8;
+ws-icon-8= 9;
+ws-icon-9= 10;
+
+
+;; =========== WIFI =============
+[module/wifi]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+tail = true
+
+format-connected = "<ramp-signal>  <label-connected>"
+
+format-connected-foreground = ${colors.foreground}
+format-connected-background = ${colors.background}
+
+label-connected = %essid% |  %downspeed:1:10%   %upspeed:1:10%
+label-connected-background = ${colors.background}
+
+format-disconnected-prefix  = "睊  "
+format-disconnected-prefix-foreground = ${colors.green}
+format-disconnected-prefix-background = ${colors.background}
+format-disconnected-foreground = ${colors.foreground}
+format-disconnected-background = ${colors.background}
+
+format-disconnected = No-Wifi
+
+ramp-signal-0 = 
+ramp-signal-foreground = ${colors.green}
+ramp-signal-background = ${colors.background}
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+
+label-layout = %layout%
+label-layout-underline = ${colors.secondary}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label = BL
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #f90000
+label = %percentage:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #4bffdc
+label = %percentage_used%%
+
+[module/eth]
+type = internal/network
+interface = enp62s0u1u2
+interval = 3.0
+tail = true
+
+format-connected = "<ramp-signal>  <label-connected>"
+
+format-connected-foreground = ${colors.foreground}
+format-connected-background = ${colors.background}
+
+label-connected = %local_ip% |  %downspeed:1:10%   %upspeed:1:10%
+label-connected-background = ${colors.background}
+
+format-disconnected-prefix  = "  "
+format-disconnected-prefix-foreground = ${colors.green}
+format-disconnected-prefix-background = ${colors.background}
+format-disconnected-foreground = ${colors.foreground}
+format-disconnected-background = ${colors.background}
+
+format-disconnected = No-Connection
+
+ramp-signal-0 = 
+ramp-signal-foreground = ${colors.green}
+ramp-signal-background = ${colors.background}
+
+[module/pulseaudio-control]
+type = custom/script
+tail = true
+label-padding = 0
+label-foreground = ${colors.foreground}
+
+# Icons mixed from Font Awesome 5 and Material Icons
+# You can copy-paste your options for each possible action, which is more
+# trouble-free but repetitive, or apply only the relevant ones (for example
+# --sink-blacklist is only needed for next-sink).
+# pacmd list-sinks
+exec = pulseaudio-control --icons-volume " , " --icon-muted " " --sink-nicknames-from "device.description" --sink-nickname "alsa_output.pci-0000_00_1b.0.analog-stereo:t  Speakers" --sink-nickname "alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo:  Headphones" listen
+click-right = exec pavucontrol &
+click-left = pulseaudio-control togmute
+click-middle = pulseaudio-control --sink-blacklist "alsa_card.usb-Logitech_G935_Gaming_Headset-00" next-sink
+scroll-up = pulseaudio-control --volume-max 130 up
+scroll-down = pulseaudio-control --volume-max 130 down
+
+[module/alsa]
+type = internal/alsa
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground-alt}
+label-muted = sound muted
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+label-active-font = 1
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close = 
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = reboot
+
+menu-2-0 = power off
+menu-2-0-exec = poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini

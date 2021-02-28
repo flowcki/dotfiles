@@ -1,0 +1,3 @@
+rofi.theme: dracula
+rofi.modi: window,run,ssh,drun
+rofi.terminal: /usr/bin/alacritty

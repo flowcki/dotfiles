@@ -1,0 +1,15 @@
+[Default Applications]
+text/html=google-chrome.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/unknown=google-chrome.desktop
+application/pdf=google-chrome-stable.desktop
+x-scheme-handler/jetbrains=jetbrains-toolbox.desktop
+inode/directory=thunar.desktop
+text/markdown=Typora.desktop
+x-scheme-handler/gitkraken=GitKraken.desktop
+
+[Added Associations]
+text/plain=VSCodium.desktop;nvim.desktop;
+text/csv=libreoffice-calc.desktop

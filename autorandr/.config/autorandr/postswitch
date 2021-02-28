@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+notify-send -i display "Screen profile" "$AUTORANDR_CURRENT_PROFILE"
+
+if [ "$AUTORANDR_CURRENT_PROFILE" = "laptop" ]; then
+	bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10
+	~/.config/polybar/laptop.sh &
+elif [ "$AUTORANDR_CURRENT_PROFILE" = "external-monitors-laptop" ] || [ "$AUTORANDR_CURRENT_PROFILE" = "external-monitors" ]; then
+	bspc monitor DP2 -d 1 2 3 4 5
+	bspc monitor HDMI1 -d 6 7 8 9 10
+	~/.config/polybar/external-monitors-laptop.sh &
+elif [ "$AUTORANDR_CURRENT_PROFILE" = "external-monitor-laptop" ]; then
+	bspc monitor HDMI1 -d 1 2 3 4 5
+	bspc monitor eDP1 -d 6 7 8 9 10
+	~/.config/polybar/external-monitor.sh &
+fi
